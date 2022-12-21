@@ -1,14 +1,17 @@
 import { Button } from "@mui/material";
 import Navbar from "../components/Navbar";
+import MainLayout from "../layouts/MainLayout";
 
 const index = () => {
     return (
         <>
-            {/* <Navbar/> */}
-            <div className="center">
-                <h1>Главная страница!</h1>
-                <h3>Здесь собраны лучшие реки!</h3>
-            </div>
+            <MainLayout>
+                <div className="center">
+                    <h1>Главная страница!</h1>
+                    <h3>Здесь собраны лучшие реки!</h3>
+                    <Button>Кнопка </Button>
+                </div>
+            </MainLayout>
 
             <style jsx>
                 {`
