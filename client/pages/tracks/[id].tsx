@@ -13,7 +13,18 @@ const TrackPage = () => {
         listens: 0,
         picture: 'https://assets.turbologo.ru/blog/ru/2022/04/06053053/arhiv-muzykalnyh-oblozhek_5.jpg',
         audio: 'string',
-        comments: [],
+        comments: [
+            {
+                _id: '2',
+                username: 'John',
+                text: 'good song'
+            },
+            {
+                _id: '3',
+                username: 'Kate',
+                text: 'very good song'
+            },
+        ],
     }
     const router = useRouter()
 
@@ -21,6 +32,7 @@ const TrackPage = () => {
 
     return (
         <MainLayout>
+           
             <Button
                 variant={'outlined'}
                 style={{ fontSize: 32 }}
@@ -40,17 +52,28 @@ const TrackPage = () => {
             <h1>Слова в треке</h1>
             <h1>{track.text}</h1>
             <h1>Комментарии</h1>
-            <TextField
-                label='Ваше имя'
-                fullWidth
-            />
-              <TextField
-                label='Комментарий'
-                fullWidth
-                multiline
-                rows = {4}
-            />
-            <Button>Отправить</Button>
+            <Grid container>
+                <TextField
+                    label='Ваше имя'
+                    fullWidth
+                    style={{marginBottom: '20px'}}
+                />
+                <TextField
+                    label='Комментарий'
+                    fullWidth
+                    multiline
+                    rows = {4}
+                />
+                <Button>Отправить</Button>
+            </Grid>
+            <div>
+                {track.comments.map(comment => 
+                    <div key={comment._id}>
+                        <div>Автор - {comment.username}</div>
+                        <div>Комментарий - {comment.text}</div>
+                    </div>    
+                )}
+            </div>
         </MainLayout>
     );
 };
