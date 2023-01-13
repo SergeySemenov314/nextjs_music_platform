@@ -1,11 +1,13 @@
 import { Pause, PlayArrow, VolumeUp } from "@mui/icons-material";
 import { Grid, IconButton } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import styles from '../styles/Player.module.scss'
 import { ITrack } from "../types/track";
 import TrackProgress from "./TrackProgress";
 
-
+let audio;
 
 const Player = () => {
     const track:ITrack = {
@@ -15,7 +17,7 @@ const Player = () => {
         text: 'Lyrics',
         listens: 0,
         picture: 'https://assets.turbologo.ru/blog/ru/2022/04/06053053/arhiv-muzykalnyh-oblozhek_5.jpg',
-        audio: 'string',
+        audio: 'http://localhost:5000/audio/1.mp3',
         comments: [
             {
                 _id: '2',
@@ -30,14 +32,34 @@ const Player = () => {
         ],
     }
     
-    const active = false
+    const { pause, volume, active, duration, currentTime } = useTypedSelector(state => state.player)
+    const { pauseTrack, playTrack } = useActions()
+    
+    useEffect(() => {
+        if (!audio) {
+            audio = new Audio()
+            audio.src = track.audio
+        }
+    }, [])
+
+    const play = () => {
+        if (pause) {
+            playTrack()
+            audio.play()
+        } else {
+            pauseTrack()
+            audio.pause()
+
+        }
+
+    }
 
     return (
         <div className= {styles.player}>
-            <IconButton onClick={(e) => e.stopPropagation()}>
-                {active
-                    ? <Pause />
-                    : <PlayArrow />
+            <IconButton onClick={play}>
+                {pause
+                    ? <PlayArrow />
+                    : <Pause />
                 }
             </IconButton>
             <Grid container direction='column' style={{ width: '200px', margin: '0 20px' }}>
