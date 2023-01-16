@@ -17,7 +17,7 @@ const Index = () => {
             text: 'Lyrics',
             listens: 0,
             picture: 'https://assets.turbologo.ru/blog/ru/2022/04/06053053/arhiv-muzykalnyh-oblozhek_5.jpg',
-            audio: 'string',
+            audio: 'http://localhost:5000/audio/1.mp3',
             comments: [],
         },
         {
@@ -27,7 +27,7 @@ const Index = () => {
             text: 'Lyrics',
             listens: 0,
             picture: 'https://assets.turbologo.ru/blog/ru/2022/04/06053053/arhiv-muzykalnyh-oblozhek_5.jpg',
-            audio: 'string',
+            audio: 'http://localhost:5000/audio/1.mp3',
             comments: [],
         },
         {
@@ -37,7 +37,7 @@ const Index = () => {
             text: 'Lyrics',
             listens: 0,
             picture: 'https://assets.turbologo.ru/blog/ru/2022/04/06053053/arhiv-muzykalnyh-oblozhek_5.jpg',
-            audio: 'string',
+            audio: 'http://localhost:5000/audio/1.mp3',
             comments: [],
         },
     ]
