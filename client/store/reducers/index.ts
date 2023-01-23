@@ -1,9 +1,12 @@
+import { trackReducer } from './trackReducer';
+import { Track } from './../../../server/src/track/schemas/track.schema';
 import { playerReducer } from './playerReducer';
 import {combineReducers} from 'redux'
 import { HYDRATE } from 'next-redux-wrapper';
 
 const rootReducer = combineReducers({
-    player: playerReducer
+  player: playerReducer,
+  track: trackReducer
 }) 
 
 export const reducer = (state, action) => {
