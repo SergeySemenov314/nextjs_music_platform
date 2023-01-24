@@ -80,17 +80,12 @@ const Index = () => {
 export default Index;
 
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({query}) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
     const dispatch = store.dispatch as NextThunkDispatch
     await dispatch(await fetchTracks())
-
-      
-    const data = query.data || 'default data';
   
     return {
-      props: {
-        data
-      }
+      props: {}
     };
 
 });
