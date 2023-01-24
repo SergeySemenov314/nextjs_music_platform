@@ -1,5 +1,6 @@
 import { Button, Card, Grid } from "@mui/material";
 import { Box } from "@mui/system";
+import axios from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
@@ -14,7 +15,7 @@ import { ITrack } from "../../types/track";
 const Index = () => {
     const router = useRouter()
     const { tracks, error } = useTypedSelector(state => state.track)
-    
+
     if (error) {
         return <MainLayout>
             <h1>{error}</h1>
@@ -79,48 +80,20 @@ const Index = () => {
 export default Index;
 
 
-// export const getServerSideProps = wrapper.getServerSideProps(store => async ({query}) => {
-//     const dispatch = store.dispatch as NextThunkDispatch
-//     await dispatch(await fetchTracks)
-
-// });
-
-// export const getServerSideProps = wrapper.getServerSideProps(store => async ({ query }) => {
-//     console.log('store state on the server before dispatch', store.getState());
-//     store.dispatch(setProfileData('mihai'));
-//     console.log('store state on the server after dispatch', store.getState());
-  
-//     const data = query.data || 'default data';
-//     //  http://localhost:3000?data='some-data'
-  
-//     return {
-//       props: {
-//         data
-//       } // will be passed to the page component as props
-//     };
-//   });
-
-  
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({ query }) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({query}) => {
     const dispatch = store.dispatch as NextThunkDispatch
-    await dispatch(await fetchTracks)
+    await dispatch(await fetchTracks())
 
-    // console.log('ИНФАА')
-    // console.log(query.data)
-  
+      
     const data = query.data || 'default data';
   
     return {
       props: {
         data
-      } // will be passed to the page component as props
+      }
     };
-  });
 
+});
 
-  
-  
-// you can also use Redux `useSelector` and other hooks instead of `connect()`
-// export default connect((state: State) => state)(Page);
 
   

@@ -7,9 +7,8 @@ const index = () => {
         <>
             <MainLayout>
                 <div className="center">
-                    <h1>Главная страница!</h1>
-                    <h3>Здесь собраны лучшие реки!</h3>
-                    <Button>Кнопка </Button>
+                    <h1>Главная страница</h1>
+                    <h3>Здесь собраны лучшие треки!</h3>
                 </div>
             </MainLayout>
 
