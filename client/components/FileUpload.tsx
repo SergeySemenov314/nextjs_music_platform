@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 interface FileUploadProps {
     setFile: Function;
     children: React.ReactNode;
-    accept: string;
+    accept: string; 
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ setFile, accept, children }) => {

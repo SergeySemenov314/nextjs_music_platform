@@ -17,7 +17,7 @@ const Create = () => {
     const router = useRouter()
 
     const next = () => {
-        if (activeStep !== 2) {
+        if (activeStep !== 2) { 
             setActiveStep((prev) => prev + 1);
         } else {
             const formData = new FormData()
