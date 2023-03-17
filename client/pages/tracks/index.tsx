@@ -1,20 +1,39 @@
-import { Button, Card, Grid } from "@mui/material";
+import { Button, Card, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import TrackList from "../../components/TrackList";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import MainLayout from "../../layouts/MainLayout";
 import { NextThunkDispatch, wrapper } from "../../store";
-import { fetchTracks } from "../../store/actions-creators/track";
+import { fetchTracks, searchTracks } from "../../store/actions-creators/track";
 import { ITrack } from "../../types/track";
 
 
 const Index = () => {
     const router = useRouter()
     const { tracks, error } = useTypedSelector(state => state.track)
+    const [query, setQuery] = useState<string>('')
+    const [timer, setTimer] = useState(null)
+    const dispatch = useDispatch() as NextThunkDispatch;
+
+    const search = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value)
+   
+
+        if(timer) {
+            clearTimeout(timer)
+        }
+        setTimer(
+            setTimeout(async () => {
+                await dispatch(await searchTracks(e.target.value))
+            }, 500)
+        )
+
+    }
 
     if (error) {
         return <MainLayout>
@@ -58,7 +77,7 @@ const Index = () => {
 
 
     return (
-        <MainLayout>
+        <MainLayout title ={'Список треков - музыкальная площадка'}>
             <Grid container justifyContent='center'>
                 <Card style={{ width: 900 }}>
                     <Box p={1}>
@@ -69,6 +88,11 @@ const Index = () => {
                         </Grid>
 
                     </Box>
+                    <TextField
+                        fullWidth
+                        value={query}
+                        onChange = {search}
+                    />
                     <TrackList tracks = {tracks} />
 
                 </Card>
